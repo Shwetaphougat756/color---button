@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Background Color Changer</title>
+  <style>
+    #colorBox {
+      width: 500px;
+      height: 300px;
+      background-color: lightgray;
+      margin: 20px auto;
+      border: 2px solid #333;
+    }
+    #controls {
+      text-align: center;
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 0 10px;
+    }
+  </style>
+</head>
+<body>
+<div id="colorBox">
+<div id="controls">
+<button id="startBtn">Start</button>	
+<button id="stopBtn">Stop</button>
+</div>
+</div>
+<script>
+  const colorBox = document.getElementById('colorBox');
+  const startBtn = document.getElementById('startBtn');
+  const stopBtn = document.getElementById('stopBtn');
+ let intervalId = null;
+ function getRandomColor() {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+
+  startBtn.addEventListener('click', () => {
+    if (intervalId === null) {
+      intervalId = setInterval(() => {
+        colorBox.style.backgroundColor = getRandomColor();
+      }, 1000);
+    }
+  });
+
+  stopBtn.addEventListener('click', () => {
+    clearInterval(intervalId);
+    intervalId = null;
+  });
+</script>
+</body>
+</html>
